@@ -32,19 +32,26 @@
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-nginx.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
     <script>
-      (function () {
-        function loadJS(src, attrs) {
-          document.write(
-            '<script src="' + src + '" ' + (attrs || '') + '><\/script>'
-          );
-        }
-
-        // Public site only
-        if (/docsify/.test(location.host)) {
-          loadJS('//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/ga.min.js');
-          loadJS('//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/matomo.min.js');
-        }
-      })();
+      window.$docsify = {
+        name: 'Flow Launcher',
+        repo: 'Flow-Launcher/Flow.Launcher',
+        relativePath: true,
+        coverpage: true,
+        mergeNavbar: true,
+        loadSidebar: true,
+        subMaxLevel: 4,
+        search: 'auto',
+        auto2top: true,
+        plugins: [
+          function (hook, vm) {
+            hook.beforeEach(function (html) {
+              url = 'https://github.com/Flow-Launcher/Docs/blob/main/' + vm.route.file
+              var editHtml = '[:memo: Edit this Page](' + url + ')\n'
+              return editHtml + html
+            })
+          }
+        ]
+      }
     </script>
     <script src="//cdn.jsdelivr.net/npm/vue@2/dist/vue.min.js"></script>
   </body>
